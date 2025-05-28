@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Steps Challenge Winners</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #0202B0, #121212);
+      color: #ffffff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header img {
+      width: 140px;
+      margin: 20px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #F3B83B;
+      margin-bottom: 0;
+    }
+
+    .section {
+      padding: 20px;
+    }
+
+    .prizes, .steps {
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    .podium {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .winner {
+      background-color: #1e1e2f;
+      border-radius: 16px;
+      padding: 20px;
+      width: 160px;
+      animation: float 3s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+    }
+
+    .winner img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid #F3B83B;
+      object-fit: cover;
+    }
+
+    .winner h2 {
+      font-size: 1.1em;
+      margin: 10px 0 5px;
+    }
+
+    .winner span {
+      display: block;
+      color: #ccc;
+    }
+
+    .gold { height: 200px; }
+    .silver { height: 160px; margin-top: 40px; }
+    .bronze { height: 140px; margin-top: 60px; }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #F3B83B;
+      border: none;
+      border-radius: 8px;
+      color: #121212;
+      cursor: pointer;
+      margin: 20px 10px 50px;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #f5c657;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    audio {
+      display: none;
+    }
+
+    #countdown {
+      position: fixed;
+      background-color: #000000ee;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4em;
+      color: #F3B83B;
+      z-index: 9999;
+    }
+
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #f3b83b;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(10); opacity: 0; }
+    }
+
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 12px;
+      background-color: #f3b83b;
+      animation: fall 3s infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1e1e1e;
+      color: #fff;
+      padding: 30px;
+      border: 2px solid #f3b83b;
+      border-radius: 12px;
+      z-index: 10000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Countdown -->
+  <div id="countdown">3</div>
+
+  <!-- Music -->
+  <audio autoplay loop>
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes/Motivational_Music/Scott_Holmes_-_Happy_Uplifting.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Header -->
+  <header>
+    <img src="Logo colors-01.png" alt="Beyond Logo" />
+    <h1>🎉 Steps Challenge Winners 🎉</h1>
+  </header>
+
+  <!-- Prizes -->
+  <div class="section prizes">
+    <strong>🏅 Prizes:</strong><br>
+    🥇 1st Place: 250 SAR + 1 Day Off<br>
+    🥈 2nd Place: 200 SAR<br>
+    🥉 3rd Place: 150 SAR
+  </div>
+
+  <!-- Steps -->
+  <div class="section steps">
+    <strong>📊 Total Steps:</strong><br>
+    Mohammed – <b>328,352</b><br>
+    Zaina – <b>318,011</b><br>
+    Sondos – <b>302,868</b>
+  </div>
+
+  <!-- Podium -->
+  <div id="winners" class="podium">
+    <div class="winner silver">
+      <img src="Zaina - Headshot 2025.jpg" alt="Zaina">
+      <h2>🥈 Zaina</h2>
+      <span>2nd Place</span>
+    </div>
+    <div class="winner gold">
+      <img src="Mo Tairi- Headshot 2025.jpg" alt="Mohammed">
+      <h2>🥇 Mohammed</h2>
+      <span>1st Place</span>
+    </div>
+    <div class="winner bronze">
+      <img src="Sondos - Headshot 2025.JPG" alt="Sondos">
+      <h2>🥉 Sondos</h2>
+      <span>3rd Place</span>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div>
+    <button onclick="scrollToWinners()">Scroll to Winners</button>
+    <button onclick="launchFireworks(); showConfetti(); showModal()">🎉 Celebrate Them</button>
+  </div>
+
+  <!-- Congrats Modal -->
+  <div id="modal" class="modal">
+    🎊 Congrats to the winners! 🎊
+  </div>
+
+  <script>
+    // Countdown
+    let count = 3;
+    const countdown = document.getElementById('countdown');
+    const timer = setInterval(() => {
+      count--;
+      countdown.innerText = count > 0 ? count : 'Let’s go!';
+      if (count < 0) {
+        clearInterval(timer);
+        countdown.style.display = 'none';
+      }
+    }, 1000);
+
+    // Scroll to winners
+    function scrollToWinners() {
+      document.getElementById("winners").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Fireworks
+    function launchFireworks() {
+      for (let i = 0; i < 20; i++) {
+        const fw = document.createElement("div");
+        fw.classList.add("firework");
+        fw.style.top = Math.random() * window.innerHeight + "px";
+        fw.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(fw);
+        setTimeout(() => fw.remove(), 1000);
+      }
+    }
+
+    // Confetti
+    function showConfetti() {
+      for (let i = 0; i < 40; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.backgroundColor = ["#f3b83b", "#ffffff", "#008CBA"][i % 3];
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+      }
+    }
+
+    // Modal
+    function showModal() {
+      const modal = document.getElementById("modal");
+      modal.style.display = "block";
+      setTimeout(() => { modal.style.display = "none"; }, 4000);
+    }
+  </script>
+
+</body>
+</html>
