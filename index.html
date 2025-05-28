@@ -45,15 +45,22 @@
     .reveal-section {
       margin: 40px 0 20px;
     }
+    .winner-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
     .winner-box {
       display: none;
-      background-color: #fff066;
-      color: #000;
+      background-color: #1e1e2f;
+      color: #fff;
       border-radius: 16px;
       padding: 20px;
       width: 200px;
-      margin: 20px auto;
       animation: float 2s ease-in-out;
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
     }
     .winner-box img {
       width: 120px;
@@ -67,6 +74,12 @@
     }
     .winner-box span {
       font-weight: bold;
+      display: inline-block;
+      margin-top: 8px;
+      background: #F3B83B;
+      color: #121212;
+      padding: 4px 10px;
+      border-radius: 6px;
     }
     button {
       padding: 10px 20px;
@@ -77,18 +90,6 @@
       color: #121212;
       cursor: pointer;
       margin: 10px;
-    }
-    .balloon {
-      position: absolute;
-      width: 30px;
-      height: 40px;
-      background: red;
-      border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
-      animation: rise 5s linear infinite;
-    }
-    @keyframes rise {
-      0% { bottom: 0; opacity: 1; }
-      100% { bottom: 100vh; opacity: 0; }
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -117,6 +118,18 @@
       font-size: 4em;
       color: #F3B83B;
       z-index: 9999;
+    }
+    .confetti {
+      position: fixed;
+      top: -10px;
+      width: 8px;
+      height: 12px;
+      background-color: #f3b83b;
+      animation: fall 3s infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
     }
   </style>
 </head>
@@ -152,22 +165,24 @@
     <button onclick="revealWinner('third')">Reveal 3rd Place</button>
   </div>
 
-  <div id="first" class="winner-box">
-    <img src="Mo Tairi- Headshot 2025.jpg" alt="Mohammed">
-    <h2>🥇 Mohammed</h2>
-    <span>328,352 steps</span>
-  </div>
+  <div class="winner-container">
+    <div id="first" class="winner-box">
+      <img src="Mo Tairi- Headshot 2025.jpg" alt="Mohammed">
+      <h2>🥇 Mohammed</h2>
+      <span>328,352 steps</span>
+    </div>
 
-  <div id="second" class="winner-box">
-    <img src="Zaina - Headshot 2025.jpg" alt="Zaina">
-    <h2>🥈 Zaina</h2>
-    <span>318,011 steps</span>
-  </div>
+    <div id="second" class="winner-box">
+      <img src="Zaina - Headshot 2025.jpg" alt="Zaina">
+      <h2>🥈 Zaina</h2>
+      <span>318,011 steps</span>
+    </div>
 
-  <div id="third" class="winner-box">
-    <img src="Sondos - Headshot 2025.JPG" alt="Sondos">
-    <h2>🥉 Sondos</h2>
-    <span>302,868 steps</span>
+    <div id="third" class="winner-box">
+      <img src="Sondos - Headshot 2025.JPG" alt="Sondos">
+      <h2>🥉 Sondos</h2>
+      <span>302,868 steps</span>
+    </div>
   </div>
 
   <button onclick="celebrate()">🎉 Celebrate Them</button>
@@ -199,7 +214,6 @@
         if (place === 'first') document.getElementById('sound-1st').play();
         if (place === 'second') document.getElementById('sound-2nd').play();
         if (place === 'third') document.getElementById('sound-3rd').play();
-        if (revealed === 3) launchBalloons();
       }, 2500);
     }
 
@@ -212,18 +226,6 @@
       const modal = document.getElementById("modal");
       modal.style.display = "block";
       setTimeout(() => { modal.style.display = "none"; }, 4000);
-    }
-
-    function launchBalloons() {
-      for (let i = 0; i < 10; i++) {
-        const b = document.createElement("div");
-        b.className = "balloon";
-        b.style.left = Math.random() * 100 + "vw";
-        b.style.backgroundColor = ["#F3B83B", "#ffffff", "#f66"][(i % 3)];
-        b.style.bottom = "0px";
-        document.body.appendChild(b);
-        setTimeout(() => b.remove(), 5000);
-      }
     }
 
     function launchConfetti() {
@@ -240,3 +242,4 @@
   </script>
 </body>
 </html>
+
