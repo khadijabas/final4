@@ -107,13 +107,24 @@
       border-radius: 12px;
       z-index: 10000;
     }
+    #countdown {
+      position: fixed;
+      background-color: #000000ee;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4em;
+      color: #F3B83B;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
+  <div id="countdown">3</div>
   <audio id="bg-music" autoplay loop>
     <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Scott_Holmes/Motivational_Music/Scott_Holmes_-_Happy_Uplifting.mp3" type="audio/mpeg">
   </audio>
-
   <header>
     <img src="Logo colors-01.png" alt="Beyond Logo" />
     <h1>Steps Challenge Winners</h1>
@@ -169,6 +180,17 @@
 
   <script>
     let revealed = 0;
+    const countdown = document.getElementById('countdown');
+    let count = 3;
+    const timer = setInterval(() => {
+      count--;
+      countdown.innerText = count > 0 ? count : 'Let’s go!';
+      if (count < 0) {
+        clearInterval(timer);
+        countdown.style.display = 'none';
+      }
+    }, 1000);
+
     function revealWinner(place) {
       document.getElementById('drumroll').play();
       setTimeout(() => {
